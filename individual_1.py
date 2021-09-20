@@ -63,7 +63,8 @@ if __name__ == '__main__':
                     count += 1
                     print(
                         '{:>4} {}'.format('*', student.get('name', '')),
-                        '{:>1} {}'.format('группа №', student.get('number', ''))
+                        '{:>1} {}'.format('группа №',
+                                          student.get('number', ''))
                     )
             if count == 0:
                 print('Таких студентов нет')
