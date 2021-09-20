@@ -4,14 +4,8 @@
 import sys
 
 if __name__ == '__main__':
-
-    print("Список команд:")
-    print("add - добавить студента;")
-    print("list - вывести список студентов, имеющих оценку 2;")
-    print("help - отобразить справку;")
-    print("exit - завершить работу с программой.")
-
     students = []
+
     while True:
         command = input(">>> ").lower()
 
@@ -21,7 +15,7 @@ if __name__ == '__main__':
         elif command == 'add':
             name = input("Фамилия и инициалы? ")
             number = input("Номер группы? ")
-            z = str(input("Успеваемость? "))
+            z = input("Успеваемость? ")
 
             student = {
                 'name': name,
@@ -34,17 +28,52 @@ if __name__ == '__main__':
                 students.sort(key=lambda item: item.get('name', ''))
 
         elif command == 'list':
+            line = '+-{}-+-{}-+-{}-+-{}-+'.format(
+                '-' * 4,
+                '-' * 30,
+                '-' * 20,
+                '-' * 15
+            )
+            print(line)
+            print(
+                '| {:^4} | {:^30} | {:^20} | {:^15} |'.format(
+                    "№",
+                    "Ф.И.О.",
+                    "Номер группы",
+                    "Успеваемость"
+                )
+            )
+            print(line)
+
+            for idx, worker in enumerate(students, 1):
+                print(
+                    '| {:>4} | {:<30} | {:<20} | {:>15} |'.format(
+                        idx,
+                        worker.get('name', ''),
+                        worker.get('number', ''),
+                        worker.get('z', 0)
+                    )
+                )
+            print(line)
+
+        elif command == 'select':
             count = 0
             for student in students:
                 if "2" in student.get('z', ''):
                     count += 1
                     print(
-                        student.get('name', ''),
-                        student.get('number', '')
-                        )
-                if count == 0:
-                    print("Таких студентов нет")
+                        '{:>4} {}'.format('*', student.get('name', '')),
+                        '{:>1} {}'.format('группа №', student.get('number', ''))
+                    )
+            if count == 0:
+                print('Таких студентов нет')
 
+        elif command == 'help':
+            print("Список команд:\n")
+            print("add - добавить студента;")
+            print("list - вывести список студентов;")
+            print("select - вывести список студентов, имеющих оценку 2;")
+            print("help - отобразить справку;")
+            print("exit - завершить работу с программой.")
         else:
             print(f"Неизвестная команда {command}", file=sys.stderr)
-            break

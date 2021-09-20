@@ -21,14 +21,14 @@ if __name__ == '__main__':
         elif command == 'add':
             # Запросить данные о работнике.
             name = input("Фамилия и инициалы? ")
-            number = input("Номер группы? ")
-            z = int(input("Успеваемость? "))
+            post = input("Должность? ")
+            year = int(input("Год поступления? "))
 
             # Создать словарь.
             worker = {
-            'name': name,
-            'post': post,
-            'year': year,
+                'name': name,
+                'post': post,
+                'year': year
             }
 
             # Добавить словарь в список.
